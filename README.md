@@ -1,18 +1,25 @@
-# @Hrmts/Validator.js
+# @Hrmts/Validate
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
-
-A validation library that validates string inputs, and returns an object. 
 
 ##Info
 **Error messages may be subject to change** 
 
-This is a validation library that not only returns true or false depending on validation result, but it also returns a spesific error message..
+This is a validation library that not only returns true or false depending on validation result, but it also returns a spesific error message.
+
+This project is inpired by [https://npmjs.org/package/validator](https://npmjs.org/package/validator) . 
 
 ## Installation 
 
-	npm install @hrmts/validator.js
-	import validate from '@hrmts/validator.js'
-	console.log(validator.textInput("Yes")) // {isValid:true, message:""}
+	npm install @hrmts/validate
+	
+###usage 
+	import validate from '@hrmts/validate'
+	console.log(validate.textInput("Yes")) // { isValid: true, message: "" }
+You can also import a single validator if you like. 
+	
+	import {textInput} from '@hrmts/validate/lib/textInput'
+	console.log(textInput("Yes")); // { isValid: true, message: "" }
+
 
 ###Validators 
 
@@ -45,7 +52,7 @@ validate.checkYear(2016, undefined, 2015); // { isValid: false, message: "Year c
 validate.checkYear("s2", undefined, 2015); // { isValid: false, message: "Year must be a Integer" }
 ```
 
-- **isAfter(toDate, fromDate = { day: 1, month: 1, year: 0 }, endDate=todaysDate )** - lets say you have two dates, a from and a to date. this is validation that to date is not lesser than from date.
+- **isAfter(toDate, fromDate = { day: 1, month: 1, year: 0 }, endDate=todaysDate )** - lets say you have two dates, a from and a to date. this is validation that to date is not less than from date.
 This function just calls `isDate(toDate, fromDate, toDate);`.
 
 - **isBefore(fromDate, toDate = todaysDate, startDate = { day: 1, month: 1, year: 0 } )** - lets say you have two dates, a from and a to date. this is validation that from date is not greater than to date.
@@ -54,11 +61,11 @@ This function just calls `isDate(toDate, fromDate, endDate);`.
 - **isDate(date, startDate = { day: 1, month: 1, year: 0 }, endDate = todaysDate)** - checks if a date is valid, checks also if date is beetween startDate and endDate.
 ```javascript
 validate.isDate({ day: 20, month: 04, year: 1991 }); // { isValid: true, message: "" }
-validate.isDate({ day: 20, month: 04, year: 1991 }, { day: 21, month: 04, year: 1991 }); // { isValid: false, message: "Day can't be lesser than 21" }
+validate.isDate({ day: 20, month: 04, year: 1991 }, { day: 21, month: 04, year: 1991 }); // { isValid: false, message: "Day can't be less than 21" }
 validate.isDate({ day: 20, month: 04, year: 1991 }, undefined, { day: 19, month: 04, year: 1991 }); // { isValid: false, message: "Day can't be greater than 19" }
 ```
 
-- **isGreater(value, MAX_LENGTH=150, name="input")** - checks if the string is lesser than minimum requirement.
+- **isGreater(value, MAX_LENGTH=150, name="input")** - checks if the string is less than minimum requirement.
 ```javascript
 validate.isGreater(""); // { isValid: true, message: "" }
 validate.isGreater("foo", 1); // { isValid: false, message: "input cannot be greater than 1 chars" }
@@ -66,7 +73,7 @@ validate.isGreater("foo",2, "bar"); // { isValid: false, message: "bar cannot be
 validate.isGreater("foo", undefined, "bar"); // { isValid: true, message: "" }
 ```
 
-- **isLesser(value, MIN_LENGTH = 0, name = "input")** - checks if the string is lesser than minimum requirement.
+- **isLesser(value, MIN_LENGTH = 0, name = "input")** - checks if the string is less than minimum requirement.
 ```javascript
 validate.isLesser(""); // { isValid: true, message: "" }
 validate.isLesser("", 1); // { isValid: false, message: "input cannot be empty" }
@@ -114,7 +121,7 @@ validationRules.push(validate.isGreater(value, max, name));
 ```
     
 
-[downloads-image]: https://img.shields.io/npm/dt/@hrmts/validator.js.svg
+[downloads-image]: https://img.shields.io/npm/dt/@hrmts/validate.svg
 
-[npm-url]: https://npmjs.org/package/@hrmts/validator.js
-[npm-image]: http://img.shields.io/npm/v/@hrmts/validator.js.svg
+[npm-url]: https://npmjs.org/package/@hrmts/validate
+[npm-image]: http://img.shields.io/npm/v/@hrmts/validate.svg
